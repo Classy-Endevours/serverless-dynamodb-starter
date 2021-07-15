@@ -1,0 +1,81 @@
+service: go-conf
+frameworkVersion: '2'
+
+# providers
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  stage: dev
+  region: us-east-1
+  environment: 
+    APP_SECRET: ${file(./config.yml):${self:custom.stage}.APP_SECRET}
+    DB_PREFIX: ${file(./config.yml):${self:custom.stage}.DB_PREFIX}
+    CANDIDATE_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    CANDIDATE_EMAIL_TABLE: "candidate-email-${opt:stage, self:provider.stage}"
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+      Resource: "*"
+
+# functions 
+functions:
+  getAllUsers:
+    handler: api/user.getAllUsers
+    memorySize: 128
+    description: List all users
+    events:
+      - http: 
+          path: users
+          method: get  
+  createUser:
+    handler: 
+      - middlewares/auth.auth
+      - api/user.createUser
+    memorySize: 128
+    description: create a new user
+    events:
+      - http: 
+          path: user
+          method: post
+
+# plugins
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+  - serverless-middleware
+
+
+# custom object
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  DB_PREFIX: ${file(./config.yml):${self:custom.stage}.DB_PREFIX}
+  dynamodb: 
+    stages:
+      - dev 
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+      seed: true
+    seed:
+      domain:
+        sources:
+          - table: ${self:custom.DB_PREFIX}-users
+            sources: [./offline/migrations/user-seed.json]
+
+# resources 
+resources:
+  Resources: ${file(offline/migrations/user.yml)}
+
+# package
+package:
+  exclude:
+    - node_modules/dynamodb-localhost/**
+    - node_modules/serverless-dynamodb-local/**
+    - node_modules/serverless-offline/**

@@ -1,0 +1,13 @@
+[{
+    "id": "c796d733-9779-45c5-a130-20fd1fd0b652",
+    "name": "Test user 1",
+    "isAdmin": true
+}, {
+    "id": "43fca9c6-91f4-4593-9e5c-fac85beab5a7",
+    "name": "Test user 2",
+    "isAdmin": true
+}, {
+    "id": "42828c93-afb5-4761-ba55-becfda40b11b",
+    "name": "Test user 3",
+    "isAdmin": false
+}]

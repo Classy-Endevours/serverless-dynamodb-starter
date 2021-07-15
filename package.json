@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "serverless-middleware": "^0.0.14",
+    "uuid": "^8.3.2"
+  },
+  "scripts": {
+    "dev": "nodemon --exec \"serverless offline start\"",
+    "db-setup": "sls dynamodb install",
+    "migrations": "sls dynamodb migrate"
+  },
+  "devDependencies": {
+    "serverless-dynamodb-local": "^0.2.40",
+    "serverless-offline": "^7.0.0"
+  }
+}
