@@ -9,7 +9,7 @@ const dynamodbOfflineOptions = {
   },
   isOffline = () => process.env.IS_OFFLINE;
 
-var client = isOffline()
+const client = isOffline()
   ? new AWS.DynamoDB.DocumentClient(dynamodbOfflineOptions)
   : new AWS.DynamoDB.DocumentClient();
 
