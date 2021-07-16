@@ -13,19 +13,28 @@ This project is based over below plugins which include dev as well as production
 # Installation
 ## Install the dynamoDB locally
 
-Follow the link here to download the local version of dynamoDB
-https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html
-
+Follow the link [here](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html) to download the local version of dynamoDB
+then, Do install the Java in your application. Following is last working checker for this repo
+```
 ### current java -version below
 java version "1.8.0_281"
 Java(TM) SE Runtime Environment (build 1.8.0_281-b09)
 Java HotSpot(TM) 64-Bit Server VM (build 25.281-b09, mixed mode)
+```
+**Test the connection**
+To test the connection you can go to the extracted folder and write
+`java -Djava.library.path*./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb`
+This will start the database server at port 8000 by default and following command will return you successful response.
 
-### go to the extracted folder
-java -Djava.library.path*./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
+`aws dynamodb list-tables --endpoint-url http://localhost:8000`
 
-### test the connection
-aws dynamodb list-tables --endpoint-url http://localhost:8000
+### Install the dependencies
 
-### Run npm install
-### Run the package.json commands to migrate and run the server
+This will be simplest step from above as you just need to fire 2 commands
+- `npm run db-setup` [If you are doing this then you can skip the above step]
+- `npm install`
+- `npm run migrations` [This will run the migrations from serverless.yml file **Resources**]
+
+### Run server locally
+Final step is to run the server locally and it would be running the below command
+`npm run dev`
