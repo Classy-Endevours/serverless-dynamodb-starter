@@ -26,7 +26,9 @@ provider:
 # functions 
 functions:
   getAllUsers:
-    handler: api/user.getAllUsers
+    handler: 
+      - middlewares/auth.auth
+      - api/user.getAllUsers
     memorySize: 128
     description: List all users
     events:

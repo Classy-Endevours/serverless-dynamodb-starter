@@ -1,6 +1,6 @@
 "use strict";
 
-const helper = require("../lib/operation"),
+const helper = require("../operations/user"),
   response = require("../util/response");
 
 module.exports.getAllUsers = async (event, cb) => {
