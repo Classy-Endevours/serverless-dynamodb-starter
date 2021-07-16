@@ -1,6 +1,19 @@
 
+## Introduction
+This is a configuration repository for the serverless application which includes following technology:
+1. NodeJS
+2. DynamoDB
+
+## Plugins
+This project is based over below plugins which include dev as well as production dependencies
+1. serverless-offline
+2. serverless-middleware
+3. serverless-dynamodb-local
+
+# Installation
 ## Install the dynamoDB locally
 
+Follow the link here to download the local version of dynamoDB
 https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html
 
 ### current java -version below
