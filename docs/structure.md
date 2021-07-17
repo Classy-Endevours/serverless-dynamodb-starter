@@ -1,0 +1,13 @@
+## Folder Structure
+- **/api** - This folder will contains the actual API login and endpoint details
+- **/database** - This folder will have all connection for the relevant databases. Currently only dynamoDB is supported
+- **/docs** - Documentation for the project
+- **/lib** - A Cross library which will contains global methods
+- **/middlewares** - API middlewares
+- **/offline** - For managing the migrations for the database connected offline
+- **/operations** - database related singleton operations
+- **/util** - utility methods
+- **config.yml** - application and env related config
+- **package.json** - dependency manager
+- **serverless.yml** - serverless setup
+- **README.md** - High level documentation

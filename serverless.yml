@@ -9,6 +9,7 @@ provider:
   stage: dev
   region: us-east-1
   environment: 
+    APP_KEY: ${file(./config.yml):${self:custom.stage}.APP_KEY}
     APP_SECRET: ${file(./config.yml):${self:custom.stage}.APP_SECRET}
     DB_PREFIX: ${file(./config.yml):${self:custom.stage}.DB_PREFIX}
     CANDIDATE_TABLE: ${self:service}-${opt:stage, self:provider.stage}
@@ -25,6 +26,24 @@ provider:
 
 # functions 
 functions:
+  getToken:
+    handler: 
+      - api/auth.getAccessToken
+    memorySize: 128
+    description: get token from api key
+    events:
+      - http: 
+          path: token
+          method: get
+  refreshToken:
+    handler: 
+      - api/auth.refreshAccessToken
+    memorySize: 128
+    description: refresh token from api key and previous token
+    events:
+      - http: 
+          path: token/refresh
+          method: get 
   getAllUsers:
     handler: 
       - middlewares/auth.auth
@@ -33,7 +52,7 @@ functions:
     description: List all users
     events:
       - http: 
-          path: users
+          path: user
           method: get  
   createUser:
     handler: 
@@ -62,7 +81,7 @@ custom:
       - dev 
     start:
       port: 8000
-      inMemory: true
+      # inMemory: true #set this value to true if you want your data to be clean after every restart
       migrate: true
       seed: true
     seed:

@@ -4,6 +4,11 @@ This is a configuration repository for the serverless application which includes
 1. NodeJS
 2. DynamoDB
 
+## Documentation
+- [Folder Structure](docs/structure.md)
+- [API Overview](docs/overview.md)
+
+
 ## Plugins
 This project is based over below plugins which include dev as well as production dependencies
 1. serverless-offline
