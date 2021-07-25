@@ -33,6 +33,8 @@ This will start the database server at port 8000 by default and following comman
 
 `aws dynamodb list-tables --endpoint-url http://localhost:8000`
 
+**note**: You don't need to keep the server running for the project to run, project will start the database by default
+
 ### Install the dependencies
 
 This will be simplest step from above as you just need to fire 2 commands
